@@ -1,0 +1,24 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: requirements
+        name: requirements
+        entry: bash -c ".venv/bin/pip freeze > requirements.txt; git add requirements.txt"
+        language: system
+    -   id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        files: \.py$
+        args:
+          [
+            "-rn",
+            "-sn",
+            "rcfile=pylintrc"
+          ]
+-   repo: https://github.com/psf/black-pre-commit-mirror
+    rev: 25.1.0
+    hooks:
+    -   id: black
+        files: \.py$
